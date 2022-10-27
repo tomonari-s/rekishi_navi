@@ -20,7 +20,8 @@ devise_for :admin,  skip: [:registrations, :passwords] ,controllers: {
   end
   
  scope module:  :public, shallow: true do
-    resources :users, only: [:show, :edit, :update]
+    resources :users, only: [:edit, :update]
+    get "/users/my_page" => "users#show"
     get '/users/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe'
     patch '/users/withdrawal' => 'users#withdrawal', as: 'withdrawal'
     resources :posts, only: [:new, :create, :show, :edit, :update, :destroy]
