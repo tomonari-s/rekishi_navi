@@ -1,0 +1,29 @@
+<p></p>
+
+<div class="container">
+  <div class ="col-md-3">
+    <h3 class ="bg-light", align="center">マイページ</h3>
+  </div>
+
+<div class ="row mt-5">
+    <div class ="col-md-8">
+      <h5 class ="font-weight-bold">登録情報<%= link_to '編集する', edit_user_path(@user.id), class:"btn btn-success ml-4" %></h5>
+      <table class="table table-bordered mt-4">
+      <tr>
+        <td class ="table-active">氏名</td>
+        <td><%= @user.last_name %> <%= @user.first_name %></td>
+      </tr>
+      <tr>
+        <td class ="table-active">カナ</td>
+        <td><%= @user.last_name_kana %> <%= @user.first_name_kana %></td>
+      </tr>
+      <tr>
+        <td class ="table-active">メールアドレス</td>
+        <td><%= @user.email %></td>
+      </tr>
+      <table>
+      
+
+    </div>
+  </div>
+</div>

@@ -7,6 +7,7 @@ devise_for :users, skip: [:passwords], controllers: {
   sessions: 'public/sessions'
 }
 
+
 # 管理者用
 # URL /admin/sign_in ...
 devise_for :admin,  skip: [:registrations, :passwords] ,controllers: {
@@ -26,6 +27,10 @@ devise_for :admin,  skip: [:registrations, :passwords] ,controllers: {
     patch '/users/withdrawal' => 'users#withdrawal', as: 'withdrawal'
     resources :posts, only: [:new, :create, :show, :edit, :update, :destroy]
     root "homes#top"
+    # ゲストログイン用3
+    devise_scope :user do
+      post "users/guest_sign_in", to: "users/sessions#guest_sign_in"
+    end
  end  
   
   
