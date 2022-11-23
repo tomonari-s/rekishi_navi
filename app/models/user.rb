@@ -6,7 +6,7 @@ class User < ApplicationRecord
          
   has_many :posts
   has_many :comments, dependent: :destroy
-  has_many :favarites, dependent: :destroy
+  has_many :favorites, dependent: :destroy
          
   # is_deletedがfalseならtrueを返すようにしている
   def active_for_authentication?

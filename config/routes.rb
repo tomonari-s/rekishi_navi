@@ -27,6 +27,7 @@ devise_for :admin,  skip: [:registrations, :passwords] ,controllers: {
     patch '/users/withdrawal' => 'users#withdrawal', as: 'withdrawal'
     resources :users, only: [:edit, :update]
     resources :posts, only: [:new, :create, :show, :edit, :update, :destroy] do
+      resources :comments, only: [:create]
       resource :favorites, only: [:create, :destroy]
     end  
     
