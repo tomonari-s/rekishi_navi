@@ -75,6 +75,9 @@
           
           <% else %>
           <li class="mr-5">
+          <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post %>
+          </li>
+          <li class="mr-5">
             <%= link_to new_post_path, class:"btn btn-outline-secondary text-dark"  do %>新規投稿
             <% end %>      
           </li>

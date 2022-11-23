@@ -4,17 +4,15 @@ class Public::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
   before_action :user_state, only: [:create]
   
-  # ゲストログイン２
-  def guest_sign_in
-    user = User.find_or_create_by(email: "guest@example.com") do |user|
-      user.password = SecureRandom.urlsafe_base64
-      user.confirmed_at = Time.now # ← Confirmable を設定している場合は追加
-      # user.name = "ゲストユーザー" # ←ユーザー名を設定している場合は追加
-    end
-    sign_in user # ← Deviseのログインメソッド
-    redirect_to root_path, notice: "ゲストユーザーとしてログインしました"
+  def new_guest
+    user = User.guest
+    # find_or_create_by!(last_name: 'さんぷる' , first_name: 'さんぷる2' , last_name_kana: 'サンプル' , first_name_kana: 'サンプル2',email: 'guest@example.com') do |user|
+    # #   user.password = SecureRandom.urlsafe_base64
+      # user.skip_confirmation!  # Confirmable を使用している場合は必要
+    #   # 例えば name を入力必須としているならば， user.name = "ゲスト" なども必要
+    sign_in user
+    redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
   end
-
   # GET /resource/sign_in
   # def new
   #   super
@@ -43,22 +41,11 @@ class Public::SessionsController < Devise::SessionsController
     ## アカウントを取得できなかった場合、このメソッドを終了する
     return if !@user
     ## 【処理内容2】 取得したアカウントのパスワードと入力されたパスワードが一致してるかを判別
-    if @user.valid_password?(params[:user][:password])
+    if @user.valid_password?(params[:user][:password]) && @user.is_deleted == true
     ## 【処理内容3】
     end
   end
   
-  # 会員の論理削除のための記述。退会後は、同じアカウントでは利用できない。
-  def reject_user
-    @user = User.find_by(name: params[:user][:last_name][:first_name])
-    if @user 
-      if @user.valid_password?(params[:user][:password]) && (@user.is_deleted == false)
-        flash[:notice] = "退会済みです。再度ご登録をしてご利用ください。"
-        redirect_to new_user_registration_path
-      else
-        flash[:notice] = "項目を入力してください"
-      end
-    end
-  end
+  
   
 end

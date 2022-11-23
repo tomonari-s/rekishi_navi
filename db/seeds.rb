@@ -9,3 +9,11 @@ Admin.create!(
     email: 'admin@admin.com',
     password: 'admin1',
     )
+    
+Tag.create!([
+    { name: '城' },
+    { name: '博物館' },
+    { name: '寺社'},
+    { name: '伝統文化'},
+    { name: '史跡'},
+    ])    

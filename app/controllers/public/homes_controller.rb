@@ -4,4 +4,6 @@ class Public::HomesController < ApplicationController
     @posts = Post.all
     
   end  
+  
+  
 end

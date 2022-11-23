@@ -17,21 +17,31 @@ devise_for :admin,  skip: [:registrations, :passwords] ,controllers: {
  namespace :admin do
     resources :users, only: [:index, :show, :update]
     resources :posts, only: [:index, :show, :update]
-    root "posts#index"
+    root "users#index"
   end
   
  scope module:  :public, shallow: true do
-    resources :users, only: [:edit, :update]
+    
     get "/users/my_page" => "users#show"
     get '/users/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe'
     patch '/users/withdrawal' => 'users#withdrawal', as: 'withdrawal'
-    resources :posts, only: [:new, :create, :show, :edit, :update, :destroy]
+    resources :users, only: [:edit, :update]
+    resources :posts, only: [:new, :create, :show, :edit, :update, :destroy] do
+      resource :favorites, only: [:create, :destroy]
+    end  
+    
     root "homes#top"
+    
+    
+    
+    get "search" => "searches#search"
     # ゲストログイン用3
-    devise_scope :user do
-      post "users/guest_sign_in", to: "users/sessions#guest_sign_in"
-    end
+    # post "users/guest_sign_in", to: "sessions#guest_sign_in"
+    
  end  
+ devise_scope :user do
+   post 'users/guest_sign_in', to: 'public/sessions#new_guest'
+ end
   
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

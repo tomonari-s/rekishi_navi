@@ -1,0 +1,52 @@
+<p></p>
+
+<div class="container">
+  <div class ="col-md-3">
+    <h3 class ="bg-light", align="center">投稿詳細</h3>
+  </div>
+  
+  <div class ="row">
+    <div class ="col-md-3 mr-0">
+      <%= image_tag @post.image, size: "250x180" %>
+    </div>
+    <div class ="col-md-5 ml-0">
+      <table class ="table table-borderless">
+        <tbody>
+
+          <tr>
+            <td>商品名</td>
+            <td><%= @post.title %></td>
+          </tr>
+          <tr>
+            <td>商品説明</td>
+
+            <td><%= @post.text %></td>
+          </tr>
+          <tr>
+            <td>ジャンル</td>
+            <!--<td><%#= @post.post_tag.tag.name %></td>-->
+          </tr>
+          
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+   <% if @post.favorited_by?(current_user) %>
+    <p>
+      <%= link_to post_favorites_path(@post), method: :delete do %>
+        ♥<%= @post.favorites.count %> いいね
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to post_favorites_path(@post), method: :post do %>
+        ♡<%= @post.favorites.count %> いいね
+      <% end %>
+    </p>
+  <% end %>
+  
+</div>
+
+

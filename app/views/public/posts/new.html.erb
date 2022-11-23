@@ -2,6 +2,19 @@
   <%= form_with model: @post do |f| %>
     <h4>画像</h4>
       <%= f.file_field :image, accept: "image/*" %>
+    
+    <div class="check_box">
+      <%= f.collection_select(:tag_ids, Tag.all, :id, :name) do |tag| %>
+      <%#= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+        <div class='form-check'>
+          <%= tag.label do %>
+            <%= tag.check_box %>
+            <%= tag.text %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+      
     <h4>タイトル</h4>
       <%= f.text_field :title %>
     <h4>本文</h4>
