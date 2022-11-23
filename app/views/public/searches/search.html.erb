@@ -1,24 +1,36 @@
-<h2>Results index</h2>
+<% if @model == 'user' %>
+	<h3>Users search for "<%= @content %>"</h3>
+  <%= render 'users/index', users: @records %>
+<% elsif @model == 'post' %>
+	<h3>Posts search for "<%= @content %>"</h3>
+  <%= render 'posts/index', posts: @records %>
+<% end %>
 
-<table class="table table-hover table-inverse">
+
+
+
+
+<!--<h2>Results index</h2>-->
+
+<!--<table class="table table-hover table-inverse">-->
   <!--検索対象モデルがUserの時 -->
-  <% if @range == "User" %>
-    <tbody>
-      <% @users.each do |user| %>
-        <tr>
-          <td><%= user.last_name %> <%= user.first_name %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  <% else %>
+<!--  <%# if @range == "User" %>-->
+<!--    <tbody>-->
+<!--      <%# @users.each do |user| %>-->
+<!--        <tr>-->
+<!--          <td><%#= user.last_name %> <%#= user.first_name %></td>-->
+<!--        </tr>-->
+<!--      <%# end %>-->
+<!--    </tbody>-->
+<!--  <%# else %>-->
     <!--検索対象モデルがUserではない時(= 検索対象モデルがPostの時) -->
-    <tbody>
-      <% @posts.each do |post| %>
-        <tr>
-          <td><%= post.title %></td>
-          <td><%= post.text %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  <% end %>
-</table>
+<!--    <tbody>-->
+<!--      <%# @posts.each do |post| %>-->
+<!--        <tr>-->
+<!--          <td><%#= post.title %></td>-->
+<!--          <td><%#= post.text %></td>-->
+<!--        </tr>-->
+<!--      <%# end %>-->
+<!--    </tbody>-->
+<!--  <%# end %>-->
+<!--</table>-->
