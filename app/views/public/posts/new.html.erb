@@ -4,8 +4,8 @@
       <%= f.file_field :image, accept: "image/*" %>
     
     <div class="check_box">
-      <%= f.collection_select(:tag_ids, Tag.all, :id, :name) do |tag| %>
-      <%#= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+      <%#= f.collection_select(:tag_ids, Tag.all, :id, :name) do |tag| %>
+      <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
         <div class='form-check'>
           <%= tag.label do %>
             <%= tag.check_box %>
