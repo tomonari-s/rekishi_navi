@@ -58,8 +58,12 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
 
-# rails g devise Admin　導入時以下のエラーの対策
+# rails g devise Admin 導入時以下のエラーの対策
 # You don't have net-smtp installed in your application. Please add it to your Gemfile and run bundle install
 gem 'net-smtp'
 gem 'net-imap'
 gem 'net-pop'
+
+# GoogleMap API導入
+gem 'gmaps4rails'
+gem 'geocoder'

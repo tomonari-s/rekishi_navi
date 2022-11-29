@@ -15,7 +15,7 @@
   </span>
   <p>ジャンル</p>
     <% post.tags.each do |tag| %>
-      <%= tag.name %>
+      <li style="list-style: none;"><%= link_to tag.name, search_path(content: tag.name, model:"tag", method: "perfect") %></li>
     <% end %>
   <p>画像</p>
     <%= image_tag post.image, size: "200x200" %>
@@ -23,7 +23,10 @@
   <span><%= post.text %></span>
   <p>投稿者</p>
   <span><%= post.user.last_name %> <%= post.user.first_name %></span>
+  
+  
+<%= render 'public/posts/map' ,post: post %>
+  
 <% end %>
-
 
 

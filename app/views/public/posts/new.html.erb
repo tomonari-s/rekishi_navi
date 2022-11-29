@@ -1,5 +1,5 @@
 <h1>画像投稿フォーム</h1>
-  <%= form_with model: @post do |f| %>
+  <%= form_with(model: @post, local: true) do |f| %>
     <h4>画像</h4>
       <%= f.file_field :image, accept: "image/*" %>
     
@@ -14,6 +14,43 @@
         </div>
       <% end %>
     </div>
+    
+    <div class="form-group">
+     <%= f.label :address, '場所' %>
+     <%= f.text_field :address, class: 'form-control' %>
+    </div>
+    
+<!---->
+<p>test</p>    
+<h2>gmap</h2>
+<div id='map'></div>
+
+<style>
+#map {
+  height: 600px;
+  width: 600px;
+}
+</style>
+
+<script>
+let map
+
+function initMap(){
+  geocoder = new google.maps.Geocoder()
+
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 36.5783, lng:136.6481},
+    zoom: 12,
+  });
+
+  marker = new google.maps.Marker({
+    position:  {lat: 36.5783, lng:136.6481},
+    map: map
+  });
+}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9T8hOp59D7S7hnSgl_dq9K2YjcqsoV-o&callback=initMap" async defer></script>
+<!---->
       
     <h4>タイトル</h4>
       <%= f.text_field :title %>
