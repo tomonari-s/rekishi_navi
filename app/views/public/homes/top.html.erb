@@ -2,6 +2,7 @@
 
 
 <%= render 'public/searches/form' %>
+<%= render 'public/searches/tag_form' %>
 
 
 <!--投稿一覧-->
@@ -13,7 +14,9 @@
     <%=link_to post.title, post_path(post.id) %>
   </span>
   <p>ジャンル</p>
-    <%= post.tags.name %>
+    <% post.tags.each do |tag| %>
+      <%= tag.name %>
+    <% end %>
   <p>画像</p>
     <%= image_tag post.image, size: "200x200" %>
   <P>本文</P>
@@ -22,6 +25,5 @@
   <span><%= post.user.last_name %> <%= post.user.first_name %></span>
 <% end %>
 
-<% @posts.tag.each do |tag| %>
-  <%= tag.name %>
-<% end %>
+
+
