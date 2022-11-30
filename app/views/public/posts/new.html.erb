@@ -15,7 +15,12 @@
       <% end %>
     </div>
     
-    <div class="form-group">
+    <h4>タイトル</h4>
+      <%= f.text_field :title %>
+    <h4>本文</h4>
+      <%= f.text_area :text %>
+    
+    <div class="actions">
       <%= f.label :address, '場所' %>
       <%= f.text_field :address, class: 'form-control' %>
       <%= f.label :latitude,"緯度" %>
@@ -23,13 +28,16 @@
       <%= f.label :longitude,"経度" %>
       <%= f.text_field :longitude,:value =>"経度", id: :longitude %>
     </div>
+    
+    <%= f.submit '投稿' %>
+  <% end %>    
 <!--badkup-->
 <h2>gmap</h2>
 
 
 <input id="address" type="textbox" value="GeekSalon">
-<input type="button" value="Encode" onclick="codeAddress()">
-<div id="display">何かが表示される、、、、！</div>
+<input type="button" value="検索" onclick="codeAddress()">
+<!--<div id="display">何かが表示される、、、、！</div>-->
 
 
 <div id='map'></div>
@@ -44,9 +52,10 @@
 <script>
 // 初期マップ設定
 let map
-let geocoder
+// let geocoder
+let marker
 
-const display = document.getElementById('display')
+// const display = document.getElementById('display')
 
 function initMap(){
   geocoder = new google.maps.Geocoder()
@@ -64,20 +73,55 @@ function initMap(){
  
 //検索語マップ設定
 
+let geocoder
+let aft
+
 function codeAddress(){
   let inputAddress = document.getElementById('address').value;
 
   geocoder.geocode( { 'address': inputAddress}, function(results, status) {
     if (status == 'OK') {
-      map.setCenter(results[0].geometry.location);
-      var marker = new google.maps.Marker({
-          map: map,
-          position: results[0].geometry.location
-      });
-      display.textContent = "検索結果：" + results[ 0 ].geometry.location
+        //マーカーが複数できないようにする
+        if (aft == true){
+            marker.setMap(null);
+        }
+
+        //新しくマーカーを作成する
+        map.setCenter(results[0].geometry.location);
+            marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location,
+            draggable: true // ドラッグ可能にする
+        });
+
+        //二度目以降か判断
+        aft = true
+
+        //検索した時に緯度経度を入力する
+        document.getElementById('latitude').value = results[0].geometry.location.latitude();
+        document.getElementById('longitude').value = results[0].geometry.location.longitude();
+
+        // マーカーのドロップ（ドラッグ終了）時のイベント
+        google.maps.event.addListener( marker, 'dragend', function(ev){
+            // イベントの引数evの、プロパティ.latLngが緯度経度
+            document.getElementById('latitude').value = ev.latitudeLongitude.latitude();
+            document.getElementById('longitude').value = ev.latitudeLongitude.longitude();
+        });
+        // display.textContent = "検索結果：" + results[ 0 ].geometry.location
     } else {
       alert('該当する結果がありませんでした：' + status);
     }
+    
+    // if (status == 'OK') {
+    //   map.setCenter(results[0].geometry.location);
+    //   var marker = new google.maps.Marker({
+    //       map: map,
+    //       position: results[0].geometry.location
+    //   });
+    //   display.textContent = "検索結果：" + results[ 0 ].geometry.location
+    // } else {
+    //   alert('該当する結果がありませんでした：' + status);
+    // }
   });   
 }
 
@@ -149,9 +193,4 @@ function codeAddress(){
 <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9T8hOp59D7S7hnSgl_dq9K2YjcqsoV-o&callback=initMap" async defer></script>-->
 <!--backup-->
       
-    <h4>タイトル</h4>
-      <%= f.text_field :title %>
-    <h4>本文</h4>
-      <%= f.text_area :text %>
-    <%= f.submit '投稿' %>
-  <% end %>
+<p></p>    
