@@ -16,13 +16,22 @@
     </div>
     
     <div class="form-group">
-     <%= f.label :address, '場所' %>
-     <%= f.text_field :address, class: 'form-control' %>
+      <%= f.label :address, '場所' %>
+      <%= f.text_field :address, class: 'form-control' %>
+      <%= f.label :latitude,"緯度" %>
+      <%= f.text_field :latitude,:value =>"緯度", id: :latitude %>
+      <%= f.label :longitude,"経度" %>
+      <%= f.text_field :longitude,:value =>"経度", id: :longitude %>
     </div>
-    
-<!---->
-<p>test</p>    
+<!--badkup-->
 <h2>gmap</h2>
+
+
+<input id="address" type="textbox" value="GeekSalon">
+<input type="button" value="Encode" onclick="codeAddress()">
+<div id="display">何かが表示される、、、、！</div>
+
+
 <div id='map'></div>
 
 <style>
@@ -33,24 +42,112 @@
 </style>
 
 <script>
+// 初期マップ設定
 let map
+let geocoder
+
+const display = document.getElementById('display')
 
 function initMap(){
   geocoder = new google.maps.Geocoder()
 
   map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 36.5783, lng:136.6481},
+    center: {lat: 35.6803997, lng:139.7690174}, //東京
     zoom: 12,
   });
 
-  marker = new google.maps.Marker({
-    position:  {lat: 36.5783, lng:136.6481},
-    map: map
-  });
+  // marker = new google.maps.Marker({
+  //   position:  {lat: 40.7828, lng:-73.9653},
+  //   map: map
+  // });
 }
+ 
+//検索語マップ設定
+
+function codeAddress(){
+  let inputAddress = document.getElementById('address').value;
+
+  geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+    if (status == 'OK') {
+      map.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location
+      });
+      display.textContent = "検索結果：" + results[ 0 ].geometry.location
+    } else {
+      alert('該当する結果がありませんでした：' + status);
+    }
+  });   
+}
+
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9T8hOp59D7S7hnSgl_dq9K2YjcqsoV-o&callback=initMap" async defer></script>
-<!---->
+<!--backup-->    
+    
+    
+    
+    
+    
+<!--badkup-->
+<!--<h2>gmap</h2>-->
+
+
+<!--<input id="address" type="textbox" value="GeekSalon">-->
+<!--<input type="button" value="Encode" onclick="codeAddress()">-->
+<!--<div id="display">何かが表示される、、、、！</div>-->
+
+
+<!--<div id='map'></div>-->
+
+<!--<style>-->
+<!--#map {-->
+<!--  height: 600px;-->
+<!--  width: 600px;-->
+<!--}-->
+<!--</style>-->
+
+<!--<script>-->
+<!--let map-->
+<!--let geocoder-->
+
+<!--const display = document.getElementById('display')-->
+
+<!--function initMap(){-->
+<!--  geocoder = new google.maps.Geocoder()-->
+
+<!--  map = new google.maps.Map(document.getElementById('map'), {-->
+<!--    center: {lat: 40.7828, lng:-73.9653},-->
+<!--    zoom: 12,-->
+<!--  });-->
+
+<!--  marker = new google.maps.Marker({-->
+<!--    position:  {lat: 40.7828, lng:-73.9653},-->
+<!--    map: map-->
+<!--  });-->
+<!--}-->
+ 
+
+<!--function codeAddress(){-->
+<!--  let inputAddress = document.getElementById('address').value;-->
+
+<!--  geocoder.geocode( { 'address': inputAddress}, function(results, status) {-->
+<!--    if (status == 'OK') {-->
+<!--      map.setCenter(results[0].geometry.location);-->
+<!--      var marker = new google.maps.Marker({-->
+<!--          map: map,-->
+<!--          position: results[0].geometry.location-->
+<!--      });-->
+<!--      display.textContent = "検索結果：" + results[ 0 ].geometry.location-->
+<!--    } else {-->
+<!--      alert('該当する結果がありませんでした：' + status);-->
+<!--    }-->
+<!--  });   -->
+<!--}-->
+
+<!--</script>-->
+<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9T8hOp59D7S7hnSgl_dq9K2YjcqsoV-o&callback=initMap" async defer></script>-->
+<!--backup-->
       
     <h4>タイトル</h4>
       <%= f.text_field :title %>
