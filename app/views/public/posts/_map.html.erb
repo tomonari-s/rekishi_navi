@@ -29,7 +29,7 @@
     function initMap() {
 
       //初期表示位置
-      let latlng = new google.maps.LatitudeLongitude(38.60, 139.5);
+      let latlng = new google.maps.LatLng(38.60, 139.5);
       //デザイン
       let styles = [
            {
@@ -51,14 +51,14 @@
       //複数マーカー ここから
       <% @posts.each do |post|%>
         ( function() { 
-          let markerLatitudeLongitude = new google.maps.LatitudeLongitude({latitude: <%= post.latitude %>, longitude: <%= post.longitude %>}); // 緯度経度のデータ作成
+          let markerLatLng = new google.maps.LatLng({lat: <%= post.latitude %>, lng: <%= post.longitude %>}); // 緯度経度のデータ作成
           let marker = new google.maps.Marker({ 
-            position: markerLatitudeLongitude, 
+            position: markerLatLng, 
             map: map 
           });
     　　　//マーカーをクリックしたとき、詳細情報を表示
           let infowindow = new google.maps.InfoWindow({
-            position: markerLatitudeLongitude,
+            position: markerLatLng,
             content: "<a href='<%= post_url(post.id) %>' target='_blank'><%= post.address %></a>"
           }); //ここで詳細ページへのリンクを表示させる
           marker.addListener('click', function() {
@@ -72,3 +72,4 @@
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9T8hOp59D7S7hnSgl_dq9K2YjcqsoV-o&callback=initMap" async defer></script>
+<p></p>

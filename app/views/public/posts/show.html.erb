@@ -24,7 +24,11 @@
           </tr>
           <tr>
             <td>ジャンル</td>
-            <td><%#= @post.tag.name %></td>
+            <td>
+              <% @post.tags.each do |tag| %>
+                  <li style="list-style: none;"><%= link_to tag.name, search_path(content: tag.name, model:"tag", method: "perfect") %></li>
+              <% end %>
+            </td>
           </tr>
           
           
@@ -62,6 +66,7 @@
     <% end %>
   </div>
   
+  <%= render 'public/posts/map_detail' %>
   
 </div>
 
