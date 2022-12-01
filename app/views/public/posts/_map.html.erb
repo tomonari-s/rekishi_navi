@@ -59,7 +59,7 @@
     　　　//マーカーをクリックしたとき、詳細情報を表示
           let infowindow = new google.maps.InfoWindow({
             position: markerLatitudeLongitude,
-            content: "<a href='<%= post_url(post.id) %>' target='_blank'><%= post.text %></a>"
+            content: "<a href='<%= post_url(post.id) %>' target='_blank'><%= post.address %></a>"
           }); //ここで詳細ページへのリンクを表示させる
           marker.addListener('click', function() {
             infowindow.open(map, marker);

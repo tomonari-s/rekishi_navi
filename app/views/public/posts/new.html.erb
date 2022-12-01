@@ -98,13 +98,13 @@ function codeAddress(){
         aft = true
 
         //検索した時に緯度経度を入力する
-        document.getElementById('latitude').value = results[0].geometry.location.latitude();
+        document.getElementById('latitude').value = results[0].geometry.location.lat();
         document.getElementById('longitude').value = results[0].geometry.location.longitude();
 
         // マーカーのドロップ（ドラッグ終了）時のイベント
         google.maps.event.addListener( marker, 'dragend', function(ev){
             // イベントの引数evの、プロパティ.latLngが緯度経度
-            document.getElementById('latitude').value = ev.latitudeLongitude.latitude();
+            document.getElementById('latitude').value = ev.latitudeLongitude.lat();
             document.getElementById('longitude').value = ev.latitudeLongitude.longitude();
         });
         // display.textContent = "検索結果：" + results[ 0 ].geometry.location
