@@ -11,90 +11,15 @@
   </head>
 
   <body>
-    <header class="border-bottom">
-  <nav class="navbar navbar-expand-lg navbar-light">
-    <div class="container">
-      <% if   user_signed_in? %>
-        <%= link_to root_path, class:"navbar-brand" do %>
-          <h2>Rekishi NAVI</h2>
-        <% end %>  
-      <% elsif admin_signed_in? %>
-          <h2>Rekishi NAVI</h2>
-      <% else %>
-        <%= link_to root_path, class:"navbar-brand" do %>
-          <h2>Rekishi NAVI</h2>
-        <% end %>
-      <% end %>    
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav ml-auto">
-          
-          
-          <% if user_signed_in? %>
-          
-          
-          <li class="mr-5">
-            <%= link_to users_my_page_path , class:"btn btn-outline-secondary text-dark" do %>マイページ
-            <% end %>
-          </li>
-          
-          <li class="mr-5">
-            <%= link_to new_post_path , class:"btn btn-outline-secondary text-dark" do %>新規投稿
-            <% end %>
-          </li>
-          
-          <li class="mr-5">
-            <%= link_to destroy_user_session_path, method: :delete , class:"btn btn-outline-secondary text-dark" do %>ログアウト
-            <% end %>
-          </li>
-          
-          <% elsif admin_signed_in? %>
-          
-          <li class="mr-3">
-            <%= link_to admin_users_path , class:"btn btn-outline-secondary text-dark" do %>会員一覧
-            <% end %>
-          </li>
-          
-          <li class="mr-3">
-            <%= link_to admin_posts_path , class:"btn btn-outline-secondary text-dark" do %>投稿一覧
-            <% end %>
-          </li>
-          
-          <li class="mr-3">
-            <%= link_to admin_root_path, class:"btn btn-outline-secondary text-dark" do %>注文履歴一覧
-            <% end %>
-          </li>
-          
-          </li>
-          <li class="mr-3">
-            <%= link_to destroy_admin_session_path, method: :delete , class:"btn btn-outline-secondary text-dark" do %>ログアウト
-            <% end %>
-          </li>
-          
-          <% else %>
-          <li class="mr-5">
-          <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post %>
-          </li>
-          <li class="mr-5">
-            <%= link_to new_post_path, class:"btn btn-outline-secondary text-dark"  do %>新規投稿
-            <% end %>      
-          </li>
-          <li class="mr-5">
-            <%= link_to new_user_registration_path, class:"btn btn-outline-secondary text-dark"  do %>新規登録
-            <% end %>      
-          </li>
-          <li class="mr-5">
-            <%= link_to user_session_path, class:"btn btn-outline-secondary text-dark"  do %>ログイン
-            <% end %>         
-          </li>
-          <% end %>
-        </ul>
+    <%= render 'layouts/header' %>
+    <main>
+      <p id="notice"><%= notice %></p>
+      <div class="d-flex justify-content-center mb-2">
+        <%= render 'public/searches/form' %>
+      </div>  
+      <div class="d-flex justify-content-center">  
+        <%= render 'public/searches/tag_form' %>
       </div>
-    </div>
-  </nav>
-</header>
     <%= yield %>
     <%= render 'layouts/footer' %>
   </body>
