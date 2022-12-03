@@ -15,10 +15,24 @@ class Public::PostsController < ApplicationController
      @comment = Comment.new
   end
   
+  def update
+    if @post.update(post_params)
+      redirect_to post_path(@post), notice: "投稿内容を更新しました."
+    else
+      render "edit"
+    end
+  end
+
+  def destroy
+    @post.destroy
+    redirect_to root_path
+  end
+
+  
   private
 
   def post_params
-    params.require(:post).permit(:title, :image, :text, :address, :latitude, :longitude, tag_ids: [])
+    params.require(:post).permit(:title, :image, :text, :address, :lat, :lng, tag_ids: [])
   end
   
 end

@@ -67,3 +67,4 @@ gem 'net-pop'
 # GoogleMap API導入
 gem 'gmaps4rails'
 gem 'geocoder'
+gem 'kaminari','~> 1.2.1'
