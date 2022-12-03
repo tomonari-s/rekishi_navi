@@ -14,12 +14,12 @@
     <%= render 'layouts/header' %>
     <main>
       <p id="notice"><%= notice %></p>
-      <div class="d-flex justify-content-center mb-2">
-        <%= render 'public/searches/form' %>
+      <div class="container">
+        <div class="d-flex justify-content-center mb-2">
+          <div class="mr-3"><%= render 'public/searches/form' %></div> 
+          <div class="mr-3"><%= render 'public/searches/tag_form' %></div> 
+        </div>
       </div>  
-      <div class="d-flex justify-content-center">  
-        <%= render 'public/searches/tag_form' %>
-      </div>
     <%= yield %>
     <%= render 'layouts/footer' %>
   </body>

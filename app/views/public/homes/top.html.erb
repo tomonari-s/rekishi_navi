@@ -1,32 +1,69 @@
 
 
-
-
-
-<!--投稿一覧-->
-<h3>投稿一覧</h3>
-<% @posts.each do |post| %>
-
-  <p>タイトル</p>
-  <span>
-    <%=link_to post.title, post_path(post.id) %>
-  </span>
-  <p>ジャンル</p>
-    <% post.tags.each do |tag| %>
-      <li style="list-style: none;"><%= link_to tag.name, search_path(content: tag.name, model:"tag", method: "perfect") %></li>
-    <% end %>
-  <p>画像</p>
-    <%= image_tag post.image, size: "200x200" %>
-  <P>本文</P>
-  <span><%= post.text %></span>
-  <p>投稿者</p>
-  <span><%= post.user.last_name %> <%= post.user.first_name %></span>
-  
-  
-
-  
-<% end %>
-
-<%= render 'public/posts/map' %>
-
+<div class='container px-5 px-sm-0'>
+  <div class='row'>
+    <div class='col-md-5'>
+      <%= render 'public/posts/map' %>
+    </div>  
+    
+    <div class='col-md-7'>  
+    <!--offset-md-1-->
+      <h3>投稿一覧</h3>
+      <%= link_to "新しい順", root_path(sort: 'created_at DESC') %>
+      <table class='table table-hover table-inverse'>
+        <thead>
+          <tr>
+            <th>投稿画像</th>
+            <th>タイトル</th>
+            <th>ジャンル</th>
+            <th>内容</th>
+            <th>投稿者</th>
+            <th colspan="1"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @posts.each do |post| %>
+      
+            <tr>
+              <td>
+                <%= image_tag post.image, size: "100x100" %>
+              </td>  
+              <td>
+                <%=link_to post.title, post_path(post.id) %>
+              </td>
+              <td>
+                <% post.tags.each do |tag| %>
+                  <li style="list-style: none;"><%= link_to tag.name, search_path(content: tag.name, model:"tag", method: "perfect") %></li>
+                <% end %>
+              </td>
+              <td><%= post.text %></td>
+              <td><%= post.user.last_name %> <%= post.user.first_name %></td>
+              <td class=<%= "favorite-" + post.id.to_s %> >
+                <%= render "public/favorites/btn", post: post %>
+              </td>
+              <td><%#= render "post_comments/counter", post: post %></td>
+            </tr>   
+          <% end %>
+        </tbody>  
+      </table>
+    </div>  
+      <!--<p>タイトル</p>-->
+      <!--<span>-->
+      <!--  <%#=link_to post.title, post_path(post.id) %>-->
+      <!--</span>-->
+      <!--<p>ジャンル</p>-->
+      <!--  <%# post.tags.each do |tag| %>-->
+      <!--    <li style="list-style: none;"><%#= link_to tag.name, search_path(content: tag.name, model:"tag", method: "perfect") %></li>-->
+      <!--  <%# end %>-->
+      <!--<p>画像</p>-->
+      <!--  <%#= image_tag post.image, size: "200x200" %>-->
+      <!--<P>本文</P>-->
+      <!--<span><%#= post.text %></span>-->
+      <!--<p>投稿者</p>-->
+      <!--<span><%#= post.user.last_name %> <%#= post.user.first_name %></span>-->
+      
+      
+    
+      
+    
 
