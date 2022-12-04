@@ -65,6 +65,12 @@
       <%= f.submit "送信する" %>
     <% end %>
   </div>
+  <div style= "display: flex;">
+    <% if @post.user == current_user %>
+      <div><%= link_to '編集', edit_post_path(@post), class: "btn btn-sm btn-success edit_post_#{@post.id}" %></div>
+      <div><%= link_to '削除', post_path(@post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_post_#{@post.id}" %></div>
+    <% end %>
+  </div>  
   
   <%= render 'public/posts/map_detail' %>
   
