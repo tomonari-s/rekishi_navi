@@ -1,0 +1,67 @@
+<div class="container">
+  <div class ="col-md-3">
+    <h3 class ="bg-light", align="center">投稿詳細</h3>
+  </div>
+  
+  
+  <div class ="row">
+    <div class ="col-md-3 mr-0">
+      <%= image_tag @post.image, size: "200x200" %>
+      <table class ="table table-borderless">
+        <tbody>
+
+          <tr>
+            <td>題</td>
+            <td><%= @post.title %></td>
+          </tr>
+          <tr>
+            <td>説明</td>
+
+            <td><%= @post.text %></td>
+          </tr>
+          <tr>
+            <td>ジャンル</td>
+            <td>
+              <% @post.tags.each do |tag| %>
+                  <li style="list-style: none;"><%= link_to tag.name, search_path(content: tag.name, model:"tag", method: "perfect") %></li>
+              <% end %>
+            </td>
+          </tr>
+          
+          
+        </tbody>
+      </table>
+      <% if @post.favorited_by?(current_user) %>
+        <p>♥<%= @post.favorites.count %> いいね</p>
+        <% else %>
+        <p>♡<%= @post.favorites.count %> いいね</p>
+      <% end %>
+    
+      <div>
+        <p>コメント件数：<%= @post.comments.count %></p>
+        <% @post.comments.each do |comment| %>
+          <!--<p><%#= image_tag comment.user.get_profile_image(100,100) %></p>-->
+          <div><%= comment.user.last_name %><%= comment.user.first_name %></div>
+          <div><%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %></div>
+          <p><%=link_to "削除", admin_comment_path(comment.id), method: :delete %></p>
+        <% end %>
+      </div>
+      <!--<div>-->
+      <!--  <%#= form_with model: [@post, @comment] do |f| %>-->
+      <!--    <%#= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>-->
+      <!--    <%#= f.submit "送信する" %>-->
+      <!--  <%# end %>-->
+      <!--</div>-->
+      <div style= "display: flex;">
+        
+          <div><%= link_to '編集', edit_post_path(@post), class: "btn btn-sm btn-success edit_post_#{@post.id}" %></div>
+          <div><%= link_to '削除', post_path(@post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_post_#{@post.id}" %></div>
+        
+      </div>  
+    </div>
+    
+    <div class ="col-md-8 ml-0">
+    </div>  
+  </div>
+  
+</div>

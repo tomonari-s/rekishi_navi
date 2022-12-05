@@ -3,10 +3,15 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-         
-  has_many :posts
+  
+  # has_one_attached :image       
+  has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  
+  # def get_profile_image
+  #   (profile_image.attached?) ? profile_image : 'no_image.jpg'
+  # end
          
   # is_deletedがfalseならtrueを返すようにしている
   def active_for_authentication?

@@ -9,8 +9,8 @@ class Post < ApplicationRecord
   validates :title,presence:true
   validates :text,presence:true,length:{maximum:400}
   
-  def favorited_by?(user)
-    favorites.exists?(user_id: user.id)
+  def favorited_by?(user_id)
+    favorites.exists?(user_id: user_id)
   end
   
   def save_tags(savepost_tags)
