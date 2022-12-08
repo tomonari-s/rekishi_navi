@@ -10,7 +10,14 @@
       <%= image_tag @post.image, size: "200x200" %>
       <table class ="table table-borderless">
         <tbody>
-
+　　　　　<tr>
+            <td>投稿者</td>
+            <td>
+              <%#= link_to (@post.user.last_name + @post.user.first_name), users_my_page_path(@post.user.id) %>
+              <%= @post.user.last_name %> <%= @post.user.first_name %>
+              <%#= link_to tag.name, search_path　) %>
+            </td>
+          </tr>
           <tr>
             <td>題</td>
             <td><%= @post.title %></td>
@@ -28,6 +35,7 @@
               <% end %>
             </td>
           </tr>
+          
           
           
         </tbody>

@@ -1,8 +1,17 @@
-<% if @model == 'user' %>
-	<h3>Users search for "<%= @content %>"</h3>
-  <%= render 'public/users/index', users: @records %>
-<% elsif @model == 'post' || @model == 'tag' %>
-	<h3>Posts search for "<%= @content %>"</h3>
-  <%= render 'public/posts/index', posts: @records %>
-<% end %>
+<div class="container">
+  
+    
+    <% if @model == 'user' %>
+      <div class ="col-md-5">
+      	<h3>会員名　検索結果 "<%= @content %>"</h3>
+      </div>	
+      <%= render 'public/users/index', users: @records %>
+    <% elsif @model == 'post' || @model == 'tag' %>
+      <div class ="col-md-5">
+      	<h3>投稿　検索結果 "<%= @content %>"</h3>
+      </div>		
+      <%= render 'public/posts/index', posts: @records %>
+    <% end %>
+  
+</div>  
 

@@ -1,0 +1,41 @@
+<table class='table table-hover table-inverse'>
+    <ul style="list-style:none;">
+      
+        <% @posts.each do |post| %>
+        <!--<div class="card w-50 mx-auto mt-4 shadow-lg" >-->
+          <li style= "box-shadow: 5px 5px 5px gray; margin-bottom: 20px; background-color: #EEEEEE;",display: flex; >
+            <div>
+              <a href='<%= post_url(post.id) %>' target='_self'><%= post.title %></a>
+            </div>
+            <div><%= post.user.last_name %> <%= post.user.first_name %></div>
+            <div style="text-align:center;">
+              <%= image_tag post.image, size: "200x200" %>
+            </div> 
+            <div style= "display: flex;">
+              <div class=<%= "favorite-" + post.id.to_s %> >
+                <%= render "public/favorites/btn", post: post %>
+              </div>
+              <div><%= render "public/comments/counter", post: post %></div>
+            </div>
+            <div><%= post.text %></div>
+            <div>
+              <% post.tags.each do |tag| %>
+                <p><%= link_to tag.name, search_path(content: tag.name, model:"tag", method: "perfect") %></p>
+              <% end %>
+            </div>
+            <div style= "display: flex;">
+              <% if post.user == current_user %>
+                <div><%= link_to '編集', edit_post_path(post), class: "btn btn-sm btn-success edit_post_#{post.id}" %></div>
+                <div><%= link_to '削除', post, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_post_#{post.id}" %></div>
+              <% end %>
+            </div>  
+          </li>  
+              
+          
+        <% end %>
+        <div class=" col-md-12 d-flex justify-content-center"><%= paginate @posts %></div>
+        
+    </ul>
+  </table>
+  
+ 
