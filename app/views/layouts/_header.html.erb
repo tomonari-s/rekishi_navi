@@ -21,14 +21,13 @@
             
             <% if user_signed_in? %>
             
-            
             <li class="mr-5">
-              <%= link_to users_my_page_user_path(current_user.id) , class:'nav-link text-dark' do %>マイページ
+              <%= link_to root_path , class:'nav-link text-dark' do %>ホーム
               <% end %>
             </li>
             
             <li class="mr-5">
-              <%= link_to new_post_path , class:'nav-link text-dark' do %>新規投稿
+              <%= link_to users_my_page_user_path(current_user.id) , class:'nav-link text-dark' do %>マイページ
               <% end %>
             </li>
             
@@ -38,7 +37,8 @@
             </li>
             
             <li class="mr-5">
-              <%= current_user.last_name %> <%= current_user.first_name %>
+              <div>ID:<%= current_user.id %></div>
+              <div><%= current_user.last_name %> <%= current_user.first_name %></div>
             </li>
             
             <% elsif admin_signed_in? %>
@@ -63,10 +63,6 @@
             <% else %>
             <li class="mr-5">
             <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post %>
-            </li>
-            <li class="mr-5">
-              <%= link_to new_post_path, class:'nav-link text-dark'  do %>新規投稿
-              <% end %>      
             </li>
             <li class="mr-5">
               <%= link_to new_user_registration_path, class:'nav-link text-dark'  do %>新規登録

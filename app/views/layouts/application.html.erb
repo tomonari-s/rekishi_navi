@@ -16,6 +16,16 @@
       <p id="notice"><%= notice %></p>
       <div class="container">
         <div class="d-flex justify-content-center mb-2">
+          <% if user_signed_in? %>
+            <div class="mr-3">
+                <%= link_to new_post_path , class:"btn btn-outline-secondary text-dark" do %>新規投稿
+                <% end %>
+            </div>
+            <div class="mr-3">
+                <%= link_to users_my_page_user_path(current_user.id) , class:"btn btn-outline-secondary text-dark" do %>いいね一覧
+                <% end %>
+            </div>
+          <% end %>
           <div class="mr-3"><%= render 'public/searches/form' %></div> 
           <div class="mr-3"><%= render 'public/searches/tag_form' %></div> 
         </div>
