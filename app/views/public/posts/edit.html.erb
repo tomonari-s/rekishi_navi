@@ -1,44 +1,57 @@
-<h1>画像投稿フォーム</h1>
-  <%= form_with(model: @post, local: true) do |f| %>
-    <h4>画像</h4>
-      <%= f.file_field :image, accept: "image/*" %>
+<div class='container px-5 px-sm-0'>
+  <div class='row'>
     
-    <div class="check_box">
-      <%#= f.collection_select(:tag_ids, Tag.all, :id, :name) do |tag| %>
-      <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
-        <div class='form-check'>
-          <%= tag.label do %>
-            <%= tag.check_box %>
-            <%= tag.text %>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
+    <div class='col-md-4'> 
+      <ul style= "border: solid 3px #000" >
+      <h3>投稿編集</h3>
+        <%= form_with model: @post, url: post_path, method: :patch do |f| %>
+          <h4>画像</h4>
+            <%= f.file_field :image, accept: "image/*" %>
+          
+          <div class="check_box">
+            <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+              <div class='form-check'>
+                <%= tag.label do %>
+                  <%= tag.check_box %>
+                  <%= tag.text %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+          
+          <h4>タイトル</h4>
+            <%= f.text_field :title, class: "form-control title" %>
+          <h4>本文</h4>
+            <%= f.text_area :text,  class: 'form-control text',size: "20x10" %>
+          
+          <div class="actions">
+            <div>
+              <input id="address" type="textbox" value="">
+              <input type="button" value="検索" onclick="codeAddress()">
+            <!--<%#= f.label :address, '場所' %>-->
+            <!--<%#= f.text_field :address, class: 'form-control' %>-->
+            </div>
+            <div>
+              <%= f.label :lat,"緯度" %>
+              <%= f.text_field :lat, class: 'form-control lat', id: :lat %>
+            </div>
+            <div>
+              <%= f.label :lng,"経度" %>
+              <%= f.text_field :lng, class: 'form-control lng', id: :lng %>
+            </div>  
+          </div>
+          
+          <%= f.submit '投稿' %>
+        <% end %>    
+      </ul>
+    </div>  
+    <div class='col-md-8'>
+      
     
-    <h4>タイトル</h4>
-      <%= f.text_field :title %>
-    <h4>本文</h4>
-      <%= f.text_area :text %>
+
     
-    <div class="actions">
-      <%= f.label :address, '場所' %>
-      <%= f.text_field :address, class: 'form-control' %>
-      <%= f.label :lat,"緯度" %>
-      <%= f.text_field :lat,:value =>"緯度", id: :latitude %>
-      <%= f.label :lng,"経度" %>
-      <%= f.text_field :lng,:value =>"経度", id: :longitude %>
-    </div>
-    
-    <%= f.submit '投稿' %>
-  <% end %>    
+  
 <!--badkup-->
-<h2>gmap</h2>
-
-
-<input id="address" type="textbox" value="GeekSalon">
-<input type="button" value="検索" onclick="codeAddress()">
-<!--<div id="display">何かが表示される、、、、！</div>-->
-
 
 <div id='map'></div>
 
@@ -61,31 +74,38 @@ function initMap(){
   geocoder = new google.maps.Geocoder()
 
   map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 35.6803997, lng:139.7690174}, //東京
-    zoom: 12,
+    center:  {lat: <%= @post.lat %>, lng: <%= @post.lng %>},
+    zoom: 15,
   });
 
-  // marker = new google.maps.Marker({
-  //   position:  {lat: 40.7828, lng:-73.9653},
-  //   map: map
-  // });
+   marker = new google.maps.Marker({
+    position:  {lat: <%= @post.lat %>, lng: <%= @post.lng %>},
+    map: map
+  });
 }
  
 //検索語マップ設定
 
+
 let geocoder
 let aft
 
-function codeAddress(){
-  let inputAddress = document.getElementById('address').value;
 
+
+function codeAddress(){
+  　　
+  geocoder = new google.maps.Geocoder()
+  let inputAddress = document.getElementById('address').value;
+    
   geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+    
     if (status == 'OK') {
         //マーカーが複数できないようにする
         if (aft == true){
-            marker.setMap(null);
+            d_arker.setMap(null);
         }
-
+        
+        
         //新しくマーカーを作成する
         map.setCenter(results[0].geometry.location);
             marker = new google.maps.Marker({
@@ -98,14 +118,14 @@ function codeAddress(){
         aft = true
 
         //検索した時に緯度経度を入力する
-        document.getElementById('latitude').value = results[0].geometry.location.lat();
-        document.getElementById('longitude').value = results[0].geometry.location.lng();
+        document.getElementById('lat').value = results[0].geometry.location.lat();
+        document.getElementById('lng').value = results[0].geometry.location.lng();
 
         // マーカーのドロップ（ドラッグ終了）時のイベント
         google.maps.event.addListener( marker, 'dragend', function(ev){
             // イベントの引数evの、プロパティ.latLngが緯度経度
-            document.getElementById('latitude').value = ev.latLng.lat();
-            document.getElementById('longitude').value = ev.latLng.lng();
+            document.getElementById('lat').value = ev.latLng.lat();
+            document.getElementById('lng').value = ev.latLng.lng();
         });
         // display.textContent = "検索結果：" + results[ 0 ].geometry.location
     } else {
@@ -127,3 +147,6 @@ function codeAddress(){
 
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9T8hOp59D7S7hnSgl_dq9K2YjcqsoV-o&callback=initMap" async defer></script>
+</div>
+  </div>    
+</div>

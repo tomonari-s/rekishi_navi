@@ -36,6 +36,7 @@ class User < ApplicationRecord
   #   end
   # end  
   
+  
   def self.search_for(content, method)
     if method == 'perfect'
       User.where('(last_name + first_name) LIKE ?', content)

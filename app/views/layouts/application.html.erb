@@ -18,7 +18,7 @@
         <div class="d-flex justify-content-center mb-2">
           <% if user_signed_in? %>
             <div class="mr-3">
-                <%= link_to new_post_path , class:"btn btn-outline-secondary text-dark" do %>新規投稿
+                <%= link_to new_post_path , class:"btn btn-outline-secondary text-dark",data: {"turbolinks"=>false} do %>新規投稿
                 <% end %>
             </div>
             <div class="mr-3">

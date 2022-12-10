@@ -11,9 +11,16 @@
               <%= image_tag post.image, size: "200x200" %>
             </div> 
             <div style= "display: flex;">
-              <div class=<%= "favorite-" + post.id.to_s %> >
-                <%= render "public/favorites/btn", post: post %>
-              </div>
+              <% if user_signed_in? %>
+                <div class=<%= "favorite-" + post.id.to_s %> >
+                  <%= render "public/favorites/btn", post: post %>
+                </div>
+              <% else %>
+                <div class=<%= "favorite-" + post.id.to_s %> >
+                  <i class="fas fa-heart" aria-hidden="true"></i>
+                  <%= post.favorites.count %>
+                </div>   
+              <% end %>  
               <div><%= render "public/comments/counter", post: post %></div>
             </div>
             <div><%= post.text %></div>
