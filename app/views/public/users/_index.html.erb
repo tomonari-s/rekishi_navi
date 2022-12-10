@@ -10,17 +10,13 @@
           <tr>
             <th>ユーザー名</th>
             <th></th>
-            <!--<th colspan="3"></th>-->
           </tr>
         </thead>
         <tbody>
           <% users.each do |user| %>
             <tr>
               <td><%= user.last_name %> <%= user.first_name %></td>
-              <div><%#= link_to '編集', edit_post_path(post), class: "btn btn-sm btn-success edit_post_#{post.id}" %></div>
               <td><%= link_to '詳細', users_my_page_user_path(user.id) %></td>
-              <%#= link_to '詳細', users_my_page_path, class: "user_#{user}" %>
-              <!--<td><%#= link_to '詳細', user, class: "user_#{user.id}" %></td>-->
             </tr>
           <% end %>
         </tbody>
