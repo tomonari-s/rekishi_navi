@@ -38,13 +38,15 @@ class User < ApplicationRecord
   
   def self.search_for(content, method)
     if method == 'perfect'
-      User.where(last_name: content)
+      User.where('(last_name + first_name) LIKE ?', content)
+      # User.where(last_name: content)
+      # User.where(last_name: content)
     elsif method == 'forward'
-      User.where('last_name LIKE ?', content + '%')
+      User.where('last_name LIKE ? OR last_name_kana LIKE ?', content + '%', content + '%')
     elsif method == 'backward'
-      User.where('last_name LIKE ?', '%' + content)
+      User.where('first_name LIKE ? OR first_name_kana LIKE ?', '%' + content, '%' + content)
     else
-      User.where('last_name LIKE ?', '%' + content + '%')
+      User.where('last_name LIKE ? OR first_name LIKE ? OR last_name_kana LIKE ? OR first_name_kana LIKE ?', '%' + content + '%', '%' + content + '%', '%' + content + '%', '%' + content + '%')
     end
   end
   # def self.looks(search, word)
