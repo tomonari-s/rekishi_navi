@@ -4,6 +4,16 @@
     <div class='col-md-4'> 
       <ul style= "border: solid 3px #000" >
       <h3>新規投稿</h3>
+      <% if @post.errors.any? %>
+        <%= @post.errors.count %>件のエラーが発生しました
+        <ul>
+          <% @post.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+      
+      
         <%= form_with(model: @post, local: true) do |f| %>
           <h4>画像</h4>
             <%= f.file_field :image, accept: "image/*" %>
