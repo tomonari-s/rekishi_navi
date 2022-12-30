@@ -4,6 +4,15 @@
     <div class='col-md-4'> 
       <ul style= "border: solid 3px #000" >
       <h3>投稿編集</h3>
+      <% if @post.errors.any? %>
+        <%= @post.errors.count %>件のエラーが発生しました
+        <ul>
+          <% @post.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+      
         <%= form_with model: @post, url: post_path, method: :patch do |f| %>
           <h4>画像</h4>
             <%= f.file_field :image, accept: "image/*", class: "form-control image" %>

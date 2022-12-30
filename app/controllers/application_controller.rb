@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   
   
+  
   def after_sign_out_path_for(resource)
     case resource
     when :admin   # ログアウト時はシンボルが返ってくる

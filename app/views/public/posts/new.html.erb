@@ -36,18 +36,18 @@
           
           <div class="actions">
             <div>
-              <input id="address" type="textbox" value="地名検索">
+              <input id="address" type="textbox" placeholder="地名検索">
               <input type="button" value="検索" onclick="codeAddress()">
             <!--<%#= f.label :address, '場所' %>-->
             <!--<%#= f.text_field :address, class: 'form-control' %>-->
             </div>
             <div>
               <%= f.label :lat,"緯度" %>
-              <%= f.text_field :lat,:value =>"緯度", id: :lat %>
+              <%= f.text_field :lat, placeholder: "地名検索して下さい", id: :lat %>
             </div>
             <div>
               <%= f.label :lng,"経度" %>
-              <%= f.text_field :lng,:value =>"経度", id: :lng %>
+              <%= f.text_field :lng, placeholder: "地名検索して下さい", id: :lng %>
             </div>  
           </div>
           

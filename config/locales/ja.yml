@@ -6,7 +6,13 @@ ja:
         title: "タイトル"
         text: "本文"
         image: "画像"
-    
+        lat: "緯度"
+        lng: "経度"
+  devise:
+    sessions:
+      signed_in: 'ログインしました。'
+      signed_out: 'ログアウトしました。'
+      already_signed_out: '既にログアウト済みです。'
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
