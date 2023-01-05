@@ -16,12 +16,12 @@
     geocoder = new google.maps.Geocoder()
   
     map = new google.maps.Map(document.getElementById('map'), {
-      center:  {lat: <%= @post.lat %>, lng: <%= @post.lng %>},
+      center:  {lat: <%= post.lat %>, lng: <%= post.lng %>},
       zoom: 15,
     });
   
      marker = new google.maps.Marker({
-      position:  {lat: <%= @post.lat %>, lng: <%= @post.lng %>},
+      position:  {lat: <%= post.lat %>, lng: <%= post.lng %>},
       map: map
     });
   }

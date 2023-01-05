@@ -5,7 +5,7 @@
       <h3 class ="bg-light", align="center">マイページ</h3>
     <% else %>
       <h3 class ="bg-light", align="center">ユーザー詳細</h3>
-    <% end %>  
+    <% end %>
   </div>
   <div class ="col-md-3"></div>
 
@@ -30,20 +30,17 @@
         <td><%= @user.email %></td>
       </tr>
       </table>
-    </div>    
+    </div>
     <div class ="col-md-4">  
-      <h5 class ="font-weight-bold">投稿</h5> 
-　　<%= render 'public/posts/post_index' %>
+      <h5 class ="font-weight-bold">投稿</h5>
+　　<%= render 'public/posts/post_index', posts: @posts %>
     </div>
     <div class ="col-md-4">
       <% if @user.id == current_user.id %>
         <h5 class ="font-weight-bold">いいね一覧</h5>
-        <%= render  "public/posts/all_favorite" %>
+        <%= render  "public/posts/all_favorite", favorite_posts: @favorite_posts %>
       <% else %>
       <% end %>
-    </div> 
+    </div>
   </div>
-  
-  
-  
 </div>

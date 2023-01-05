@@ -76,6 +76,3 @@ group :production do
 end
 
 # 開発環境準備2(デプロイ)
-gem "net-smtp"
-gem "net-pop"
-gem "net-imap"

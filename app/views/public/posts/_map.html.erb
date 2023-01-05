@@ -33,7 +33,7 @@
     
 
     //複数マーカー ここから
-    <% @posts.each do |post|%>
+    <% posts.each do |post|%>
       ( function() { 
         let markerLatLng = new google.maps.LatLng({lat: <%= post.lat %>, lng: <%= post.lng %>}); // 緯度経度のデータ作成
         let marker = new google.maps.Marker({ 

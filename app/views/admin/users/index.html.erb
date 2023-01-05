@@ -1,5 +1,3 @@
-<p></p>
-
 <div class="container">
   <div class ="col-md-3">
     <h4 class ="bg-light", align="center">会員一覧</h4>
@@ -8,34 +6,34 @@
   <div class ="row">
     <div class ="col-md-8 mx-auto">
       <table class ="table">
-      <thead class ="bg-light">
-        <tr>
-          <th>会員ID</th>
-          <th>氏名</th>
-          <th>メールアドレス</th>
-          <th>ステータス</th>
-        </tr>
-      </thead>
-      <tbody>  
-      <% @users.each do |user| %>
-        <tr>
-          <td><%= user.id %></td>
-          <td>
-            <%= link_to admin_user_path(user) do %>
-            <span class ="text-dark border-bottom border-dark"><%= user.last_name %><%= user.first_name %></span>
-            <% end %>
-          </td>
-          <td><%= user.email  %></td>
-          <td>
-            <% if user.is_deleted == false  %>
-              <span class ="text-success font-weight-bold">有効</span>
-              <% else %>
-              <span class ="text-secondary font-weight-bold">退会</span>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>  
-      </tbody> 
+        <thead class ="bg-light">
+          <tr>
+            <th>会員ID</th>
+            <th>氏名</th>
+            <th>メールアドレス</th>
+            <th>ステータス</th>
+          </tr>
+        </thead>
+        <tbody>  
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= user.id %></td>
+              <td>
+                <%= link_to admin_user_path(user) do %>
+                <span class ="text-dark border-bottom border-dark"><%= user.last_name %><%= user.first_name %></span>
+                <% end %>
+              </td>
+              <td><%= user.email  %></td>
+              <td>
+                <% if user.is_deleted == false  %>
+                  <span class ="text-success font-weight-bold">有効</span>
+                  <% else %>
+                  <span class ="text-secondary font-weight-bold">退会</span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>  
+        </tbody> 
       </table>
     </div>
   </div>

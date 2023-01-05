@@ -1,5 +1,3 @@
-<p></p>
-
 <div class ="container">
   <div class ="col-md-3">
     <h4 class ="bg-light", align="center">ログイン</h4>
@@ -14,26 +12,27 @@
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <table class ="table table-borderless">
         <tbody>
-        <tr>
-          <td>メールアドレス</td>
-          <td colspan ="2"><%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder: "sample@example.com", size:"40" %></td>
-        </tr>
-        <tr>
-          <td>パスワード</td>
-          <td colspan="2"><%= f.password_field :password, autocomplete: "current-password", size:"40" %></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td colspan="3"><%= f.submit "ログイン", class:"btn btn-primary w-50" %></td>
-        </tr>
+          <tr>
+            <td>メールアドレス</td>
+            <td colspan ="2"><%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder: "sample@example.com", size:"40" %></td>
+          </tr>
+          <tr>
+            <td>パスワード</td>
+            <td colspan="2"><%= f.password_field :password, autocomplete: "current-password", size:"40" %></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td colspan="3"><%= f.submit "ログイン", class:"btn btn-primary w-50" %></td>
+          </tr>
         </tbody>
         
       </table>
       <% end %>
-    </div>  
-  </div>  
+    </div>
+  </div>
   
   <div class ="col-md-4 ml-3">
     <h5 class ="bg-light", align="center">会員登録がお済みでない方</h5>
     <p class ="border_bottom pl-5"><%= link_to 'こちら', new_user_registration_path %>  から新規登録を行ってください。</p>
   </div>
+</div>
