@@ -53,8 +53,11 @@
               <% end %>
             </li>
             
-            
+            <li class="mr-3">
+              <%= link_to admin_tags_path , class:'nav-link text-dark' do %>タグ編集
+              <% end %>
             </li>
+            
             <li class="mr-3">
               <%= link_to destroy_admin_session_path, method: :delete , class:'nav-link text-dark' do %>ログアウト
               <% end %>
